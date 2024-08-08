@@ -1,46 +1,23 @@
 /*
-Write a program that takes as input the size of the array and the elements in the array. 
-The program then asks the user to enter a particular index and prints the element at that index. 
-Index  starts from zero. 
+Define a java class that accepts an integer(between 1 and 255) from the user and displays 
+the String representation of the argument passed as an unsigned integer in base 2. 
+The output displayed should contain 8 digits and should be padded with leading 0s(zeros), 
+in case the returned String contains less than 8 characters.
 
- This program may generate Array Index Out Of Bounds Exception  or NumberFormatException.  
- Use exception handling mechanisms to handle this exception. 
+For example, if the user enters the value 16, then the output should be
 
-Sample Input and Output 1:
-Enter the number of elements in the array
-2
-Enter the elements in the array
-50
-80
-Enter the index of the array element you want to access
-1
-The array element at index 1 = 80
-The array element successfully accessed
+00010000
 
+and if the user enters the value 100, the output should be
 
- Sample Input and Output 2:
-Enter the number of elements in the array
-2
-Enter the elements in the array
-50
-80
-Enter the index of the array element you want to access
-9
-java.lang.ArrayIndexOutOfBoundsException
+01100100
 
-
- Sample Input and Output 3:
-Enter the number of elements in the array
-2
-Enter the elements in the array
-30
-j
-java.lang.NumberFormatException
+You are expected to use Integer class conversion method/s described in the PDF file. 
+Use Scanner class to accept user inputs.(Hint : You may use String.format() method for the expected output)
  * */
 
-package WiproAssign.Handling;
+//package com.w3epic.wiprotraining.assignment3;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Assignment3 {
@@ -48,27 +25,12 @@ public class Assignment3 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Enter the number of elements in the arrays");
-		int n = sc.nextInt();
+		int input = sc.nextInt();
 		
-		int[] arr = new int[n];
+		String output = String.format("%8s", Integer.toBinaryString(input)).replace(' ', '0');
+		System.out.println(output);
 		
-		System.out.println("Enter the elements in the array: ");
-		try {
-			for (int i = 0; i < n; i++)
-				arr[i] = sc.nextInt();
 		
-			System.out.println("Enter the index of the array element you want to access");
-
-			int index = sc.nextInt();
-			System.out.println("The array element at index " + index + " = " + arr[index]);
-			System.out.println("The array element successfully accessed");
-		} catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println("java.lang.ArrayIndexOutOfBoundsException");
-		} catch (InputMismatchException e) {
-			System.out.println("java.util.InputMismatchException");
-		}
-
 		sc.close();
 
 	}

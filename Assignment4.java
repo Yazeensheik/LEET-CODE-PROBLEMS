@@ -1,53 +1,52 @@
 /*
-Write a class MathOperation which accepts integers from command line. 
-Create an array using these parameters. Loop through the array and obtain the sum and 
-average of all the elements. 
-Display the result. 
-Check for various exceptions that may arise like ArithmeticException, NumberFormatException, and so on.
-For example: The class would be invoked as follows: 
-C:>java MathOperation 1900, 4560, 0, 32500
-
+Create an employee object and initialize its properties. 
+Create a clone of this object and store it in a different object. 
+Now change the properties of the first employee object. 
+Print both the objects and observe the change.
  * */
 
-package WiproAssign.Handling;
+//package com.w3epic.wiprotraining.assignment4;
 
-import java.util.InputMismatchException;
+class Employee implements Cloneable {
+	private String name;
+	
+	public Employee(String name) {
+		this.name = name;
+	}
+	
+//	public Employee(Employee emp) {
+//		this.name = emp.name;
+//	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	@Override
+	public Employee clone() {
+		try {
+			return (Employee) super.clone();
+		} catch (CloneNotSupportedException e) {
+			System.out.println("Cloning Not Allowed");
+			return this;
+		}		
+	}
+}
 
 public class Assignment4 {
 
 	public static void main(String[] args) {
-		int n = args.length;
+		Employee emp = new Employee("Bob Biswas");
+		Employee empClone = emp.clone();
 		
-		for (int i = 0; i < n; i++)
-			if (args[i].charAt(args[i].length() - 1) == ',') 
-				args[i] = args[i].replace(",", "");
+		empClone.setName("John Doe");
 		
-		//System.out.println(Arrays.toString(args));
-		
-		int[] arr = new int[n];
-
-		int sum = 0;
-		double avg = 0;
-		
-		try {
-			for (int i = 0; i < n; i++)
-				arr[i] = Integer.parseInt(args[i]);
-			
-			for (int i = 0; i < n; i++)
-				sum += arr[i];
-			
-			avg = sum / n;
-		} catch (NumberFormatException e) {
-			System.out.println("NumberFormatException");
-		} catch (ArithmeticException e) {
-			System.out.println("ArithmeticException");
-		} catch (InputMismatchException e) {
-			System.out.println("InputMismatchException");
-		}
-		
-		System.out.println("sum: " + sum);
-		System.out.println("avg: " + avg);
-		
+		System.out.println(empClone.getName());
+		System.out.println(emp.getName());
 	}
 
 }
